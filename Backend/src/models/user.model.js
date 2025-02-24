@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import jwr from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
@@ -33,8 +33,7 @@ const userSchema = new mongoose.Schema(
     refreshToken: {
       type: String,
     },
-  },
-  { timestamps: true }
+  },{ timestamps: true }
 );
 
 userSchema.pre("save", async function (next) {
@@ -43,11 +42,9 @@ userSchema.pre("save", async function (next) {
     next();
 });
 
-
 userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password,  this.password);
 };
-
 
 userSchema.methods.generateAccessToken = function () {
     return jwt.sign(
