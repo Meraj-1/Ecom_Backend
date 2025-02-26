@@ -14,10 +14,10 @@ function Footer() {
         <div>
           <p className='text-xl font-medium mb-5 '>COMPANY</p>
           <ul className='flex flex-col gap-1 text-gray-600'>
-            <li>HOME</li>
-            <li>ABOUT_US</li>
-            <li>DELIVERY</li>
-            <li>PRIVACY_POLICY</li>
+            <li className='cursor-pointer hover:font-bold '> <a href="/">HOME</a></li>
+            <li className='cursor-pointer hover:font-bold '> <a href="/about">ABOUT_US</a></li>
+            {/* <li className='cursor-pointer hover:font-bold '> <a href="/"></a>DELIVERY</li> */}
+            <li className='cursor-pointer hover:font-bold '> <a href="/policy">PRIVACY_POLICY</a></li>
           </ul>
         </div>
         <div>
