@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
-    fulllname: {
+    fullname: {
       type: String,
       required: true,
       trim: true,
@@ -62,7 +62,7 @@ userSchema.methods.generateAccessToken = function () {
 }
 
 userSchema.methods.generateRefreshToken = function () {
-    return jwt.gain({
+    return jwt.sign({
         _id: this.id,
     },
     process.env.REFRESH_TOKEN_SECRET,
