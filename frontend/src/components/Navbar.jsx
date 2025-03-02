@@ -38,7 +38,8 @@ const Navbar = () => {
       <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
         <p className='cursor-pointer hover:text-black'>My Profile</p>
         <p className='cursor-pointer hover:text-black'>Orders</p>
-        <p className='cursor-pointer hover:text-black'>LogOut</p>
+        {/* <p className='cursor-pointer hover:text-black'>LogOut</p> */}
+        <p className='cursor-pointer hover:text-black'><a href="/register">Register</a></p>
       </div>
       </div>
       </div>
@@ -58,7 +59,6 @@ const Navbar = () => {
        <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/collection">COLLECTON</NavLink>
        <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/about">ABOUT</NavLink>
        <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/contact">CONTACT</NavLink>
-
         </div>
        </div>
     </div>

@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify'; // Import Toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 
-const Login = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
+    fullname: '',
+    username: '',
     email: '',
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -22,30 +23,25 @@ const Login = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/user/login',
+        'http://localhost:8080/user/register', // Adjust your API endpoint
         formData,
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      // Save user token (if backend returns it)
-      localStorage.setItem('token', response.data.token);
-
       // Show success toast
-      toast.success('Login Successful! Redirecting...', {
+      toast.success('Account created successfully! Redirecting to login...', {
         position: 'top-center',
         autoClose: 2000,
       });
 
-      // Navigate to home page after 2 seconds
-      setTimeout(() => navigate('/'), 2000);
+      // Redirect to login after 2 seconds
+      setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
-      toast.error('Login failed! Please try again.', {
+      toast.error(err.response?.data?.message || 'Registration failed', {
         position: 'top-center',
         autoClose: 2000,
       });
@@ -61,7 +57,27 @@ const Login = () => {
         onSubmit={onSubmitHandler}
         className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800"
       >
-        <h2 className="text-3xl font-bold mb-4">Login</h2>
+        <h2 className="text-3xl font-bold mb-4">Register</h2>
+
+        <input
+          type="text"
+          name="fullname"
+          value={formData.fullname}
+          onChange={onChangeHandler}
+          placeholder="Full Name"
+          className="w-full px-3 py-2 border border-gray-800"
+          required
+        />
+
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={onChangeHandler}
+          placeholder="Username"
+          className="w-full px-3 py-2 border border-gray-800"
+          required
+        />
 
         <input
           type="email"
@@ -73,6 +89,7 @@ const Login = () => {
           required
         />
 
+        {/* Password Input with Show/Hide Icon */}
         <div className="relative w-full">
           <input
             type={showPassword ? 'text' : 'password'}
@@ -91,25 +108,23 @@ const Login = () => {
           </div>
         </div>
 
-        <p className='text-sm font-bold'>
-          Don't have an account?{' '}
-          <a href="/register" className="text-blue-500 hover:underline">
-            Register Here
+        <p className='font-bold text-sm'>
+          Already have an account?{' '}
+          <a href="/login" className="text-blue-500 hover:underline">
+            Login Here
           </a>
         </p>
-
-        {error && <p className="text-red-500 text-sm">{error}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className="cursor-pointer bg-black font-bold text-white  px-8 py-2 mt-4"
+          className="cursor-pointer bg-black text-white font-bold px-8 py-2 mt-4"
         >
-          {loading ? 'Processing...' : 'Login'}
+          {loading ? 'Processing...' : 'Register'}
         </button>
       </form>
     </>
   );
 };
 
-export default Login;
+export default Register;
