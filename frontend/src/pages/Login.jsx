@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify'; // Import Toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
+import { toast, ToastContainer } from 'react-toastify'; // Added ToastContainer import
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/user/login',
+        'https://ecom-backend-sage.vercel.app/user/login',
         formData,
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -91,19 +91,19 @@ const Login = () => {
           </div>
         </div>
 
-        <p className='text-sm font-bold'>
+        <p className="text-sm font-bold">
           Don't have an account?{' '}
           <a href="/register" className="text-blue-500 hover:underline">
             Register Here
           </a>
         </p>
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p className="text-red-500 text-sm">{error}</p>} {/* Display error message */}
 
         <button
           type="submit"
           disabled={loading}
-          className="cursor-pointer bg-black font-bold text-white  px-8 py-2 mt-4"
+          className="cursor-pointer bg-black text-white font-bold px-8 py-2 mt-4"
         >
           {loading ? 'Processing...' : 'Login'}
         </button>

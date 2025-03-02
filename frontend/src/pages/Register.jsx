@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify'; // Import Toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
+import { toast, ToastContainer } from 'react-toastify'; // Added ToastContainer import
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/user/register', // Adjust your API endpoint
+        'https://ecom-backend-sage.vercel.app/user/register', // Adjust your API endpoint
         formData,
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -108,7 +108,7 @@ const Register = () => {
           </div>
         </div>
 
-        <p className='font-bold text-sm'>
+        <p className="font-bold text-sm">
           Already have an account?{' '}
           <a href="/login" className="text-blue-500 hover:underline">
             Login Here
