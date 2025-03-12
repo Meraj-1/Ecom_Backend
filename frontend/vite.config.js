@@ -7,4 +7,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react-toastify'],
   },
+  resolve: {
+    alias: {
+      '@components': '/src/components',
+    },
+  },
 })
