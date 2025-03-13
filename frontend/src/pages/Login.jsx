@@ -1,114 +1,101 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify'; // Added ToastContainer import
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';  // Importing Eye icons
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+
   const [loading, setLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);  // State to toggle password visibility
   const navigate = useNavigate();
 
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmitHandler = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        'https://ecom-backend-sage.vercel.app/user/login',
-        formData,
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-
-      // Save user token (if backend returns it)
-      localStorage.setItem('token', response.data.token);
-
-      // Show success toast
-      toast.success('Login Successful! Redirecting...', {
-        position: 'top-center',
-        autoClose: 2000,
+      const response = await fetch('http://localhost:8080/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
-      // Navigate to home page after 2 seconds
-      setTimeout(() => navigate('/'), 2000);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
-      toast.error('Login failed! Please try again.', {
-        position: 'top-center',
-        autoClose: 2000,
-      });
-    } finally {
-      setLoading(false);
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.success) {
+          toast.success('Login successful!');
+          navigate('/');  // Redirect to home page
+        } else {
+          toast.error(data.message || 'Login failed!');
+        }
+      } else {
+        toast.error('Server error occurred.');
+      }
+    } catch (error) {
+      console.error('An error occurred during login:', error);
+      toast.error('An error occurred during login.');
     }
+
+    setLoading(false);
   };
 
   return (
-    <>
-      <ToastContainer /> {/* Toast container to display notifications */}
-      <form
-        onSubmit={onSubmitHandler}
-        className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800"
-      >
-        <h2 className="text-3xl font-bold mb-4">Login</h2>
+    <div className="mt-30 flex items-center justify-center">
+      <form onSubmit={handleLogin} className="p-8 rounded-lg shadow-md w-96">
+        <h2 className="text-2xl font-bold mb-4">Login</h2>
 
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={onChangeHandler}
           placeholder="Email"
-          className="w-full px-3 py-2 border border-gray-800"
+          onChange={handleChange}
+          value={formData.email}
+          className="w-full p-2 mb-3 cursor-pointer bg-gray-100 rounded border border-black focus:outline-none"
           required
         />
 
-        <div className="relative w-full">
+        <div className="relative">
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={passwordVisible ? 'text' : 'password'}  // Toggle input type based on password visibility
             name="password"
-            value={formData.password}
-            onChange={onChangeHandler}
             placeholder="Password"
-            className="w-full px-3 py-2 border border-gray-800"
+            onChange={handleChange}
+            value={formData.password}
+            className="w-full p-2 mb-3 bg-gray-100 cursor-pointer rounded border border-black focus:outline-none"
             required
           />
-          <div
-            className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-            onClick={() => setShowPassword((prev) => !prev)}
+          <span
+            className="absolute right-3 top-3 cursor-pointer"
+            onClick={() => setPasswordVisible(!passwordVisible)}  // Toggle password visibility
           >
-            {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
-          </div>
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}  {/* Display eye or eye-slash icon */}
+          </span>
         </div>
-
-        <p className="text-sm font-bold">
-          Don't have an account?{' '}
-          <a href="/register" className="text-blue-500 hover:underline">
-            Register Here
-          </a>
-        </p>
-
-        {error && <p className="text-red-500 text-sm">{error}</p>} {/* Display error message */}
 
         <button
           type="submit"
+          className="w-full bg-black p-2 text-white rounded cursor-pointer font-bold"
           disabled={loading}
-          className="cursor-pointer bg-black text-white font-bold px-8 py-2 mt-4"
         >
-          {loading ? 'Processing...' : 'Login'}
+          {loading ? 'Logging in...' : 'Login'}
         </button>
+
+        <p className="text-sm mb-2 font-bold text-center mt-2">
+          Don't have an account? <a href="/register" className="text-blue-400">Register</a>
+        </p>
       </form>
-    </>
+    </div>
   );
 };
 

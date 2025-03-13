@@ -1,129 +1,111 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify'; // Added ToastContainer import
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';  // Import icons
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    fullname: '',
-    username: '',
-    email: '',
-    password: '',
+    fullname: "",
+    username: "",
+    email: "",
+    password: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
+
   const [loading, setLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);  // State to toggle password visibility
+
   const navigate = useNavigate();
 
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmitHandler = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        'https://ecom-backend-sage.vercel.app/user/register', // Adjust your API endpoint
-        formData,
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-
-      // Show success toast
-      toast.success('Account created successfully! Redirecting to login...', {
-        position: 'top-center',
-        autoClose: 2000,
+      const response = await fetch('http://localhost:8080/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
-      // Redirect to login after 2 seconds
-      setTimeout(() => navigate('/login'), 2000);
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Registration failed', {
-        position: 'top-center',
-        autoClose: 2000,
-      });
-    } finally {
-      setLoading(false);
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success('Registration successful!');
+        navigate('/');  // Redirect to the home page
+      } else {
+        toast.error(data.message || 'Registration failed!');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred during registration.');
     }
+
+    setLoading(false);
   };
 
   return (
-    <>
-      <ToastContainer /> {/* Toast container to display notifications */}
-      <form
-        onSubmit={onSubmitHandler}
-        className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800"
-      >
-        <h2 className="text-3xl font-bold mb-4">Register</h2>
+    <div className="mt-30 flex items-center justify-center">
+      <form onSubmit={handleRegister} className="p-8 rounded-lg shadow-md w-96">
+        <h2 className="text-2xl font-bold mb-4">Register</h2>
 
         <input
           type="text"
           name="fullname"
-          value={formData.fullname}
-          onChange={onChangeHandler}
           placeholder="Full Name"
-          className="w-full px-3 py-2 border border-gray-800"
+          onChange={handleChange}
+          className="w-full p-2 mb-3 cursor-pointer bg-gray-100 rounded border border-black focus:outline-none"
           required
         />
 
         <input
           type="text"
           name="username"
-          value={formData.username}
-          onChange={onChangeHandler}
           placeholder="Username"
-          className="w-full px-3 py-2 border border-gray-800"
+          onChange={handleChange}
+          className="w-full p-2 mb-3 cursor-pointer bg-gray-100 rounded border border-black focus:outline-none"
           required
         />
 
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={onChangeHandler}
           placeholder="Email"
-          className="w-full px-3 py-2 border border-gray-800"
+          onChange={handleChange}
+          className="w-full p-2 mb-3 cursor-pointer bg-gray-100 rounded border border-black focus:outline-none"
           required
         />
 
-        {/* Password Input with Show/Hide Icon */}
-        <div className="relative w-full">
+        <div className="relative">
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={passwordVisible ? 'text' : 'password'}  // Toggle input type based on password visibility
             name="password"
-            value={formData.password}
-            onChange={onChangeHandler}
             placeholder="Password"
-            className="w-full px-3 py-2 border border-gray-800"
+            onChange={handleChange}
+            className="w-full p-2 mb-3 cursor-pointer bg-gray-100 rounded border border-black focus:outline-none"
             required
           />
-          <div
-            className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-            onClick={() => setShowPassword((prev) => !prev)}
+          <span
+            className="absolute right-3 top-3 cursor-pointer"
+            onClick={() => setPasswordVisible(!passwordVisible)}  
           >
-            {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
-          </div>
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}  
+          </span>
         </div>
 
-        <p className="font-bold text-sm">
-          Already have an account?{' '}
-          <a href="/login" className="text-blue-500 hover:underline">
-            Login Here
-          </a>
+        <p className='text-sm mb-2 font-bold'>
+          If you have already? <a href="/login" className='text-blue-400'>an account</a>
         </p>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="cursor-pointer bg-black text-white font-bold px-8 py-2 mt-4"
-        >
-          {loading ? 'Processing...' : 'Register'}
+        <button type="submit" className="w-full bg-black p-2 cursor-pointer text-white rounded font-bold">
+          {loading ? 'Registering...' : 'Register'}
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
