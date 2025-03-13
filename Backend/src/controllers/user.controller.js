@@ -108,7 +108,6 @@ const loginUser = asyncHandler(async (req, res) => {
 // })
  
 const logoutUser = asyncHandler(async (req, res) => {
-    console.log("User Object:", req.user); // 🔍 Debugging ke liye
     if (!req.user) {
         throw new ApiError(401, "Unauthorized: User not found in request");
     }
