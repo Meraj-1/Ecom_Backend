@@ -8,7 +8,7 @@ const app = express()
 
 app.use(
     cors({
-      origin: "http://localhost:5173", // Allow frontend URL
+      origin: "https://ecom-forever-2.vercel.app/", // Allow frontend URL
       methods: "GET,POST,PUT,DELETE",
       credentials: true, // Allow cookies if needed
     })
