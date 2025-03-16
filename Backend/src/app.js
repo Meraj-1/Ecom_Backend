@@ -6,13 +6,7 @@ dotenv.config()
 
 const app = express()
 
-app.use(
-    cors({
-      origin: "https://ecom-forever-2.vercel.app/", // Allow frontend URL
-      methods: "GET,POST,PUT,DELETE",
-      credentials: true, // Allow cookies if needed
-    })
-  );
+app.use(cors({ origin: "*" }));
 app.use(express.json({limit : "16kb"}))
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(cookieparser())
