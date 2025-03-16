@@ -14,7 +14,9 @@ app.use(cookieparser())
 //routes import 
 import userRouter from "./routes/user.routes.js"
 
-
+app.get("/", (req, res) => {
+  res.send("API is working on Vercel!");
+});
 
 app.use("/api/user", userRouter)
 
