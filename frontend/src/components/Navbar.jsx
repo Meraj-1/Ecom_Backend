@@ -13,19 +13,19 @@ const Navbar = () => {
     <div className='flex items-center justify-between py-5 font-medium'>
      <Link to='/'> <img src={assets.logo} alt="logo_brand"  className='w-36'/> </Link>
       <ul className='hidden sm:flex gap-5 text-sm text-gray-700  '>
-        <NavLink to="/" className="flex flex-col items-center gap-1">
+        <NavLink to="/" className="flex flex-col items-center gap-1 relative  after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
          <p>HOME</p>
          <hr className='w-2/4 border-none h-[1.5px] hidden bg-gray-700'/>
         </NavLink>
-        <NavLink to="/collection" className="flex flex-col items-center gap-1">
+        <NavLink to="/collection" className="flex flex-col items-center gap-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
          <p>COLLECTION</p>
          <hr className='w-2/4 border-none h-[1.5px] hidden bg-gray-700'/> 
         </NavLink>
-        <NavLink to="/about" className="flex flex-col items-center gap-1">
+        <NavLink to="/about" className="flex flex-col items-center gap-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
          <p>ABOUT</p>
          <hr className='w-2/4 border-none h-[1.5px] hidden bg-gray-700'/>
         </NavLink>
-        <NavLink to="/contact" className="flex flex-col items-center gap-1">
+        <NavLink to="/contact" className="flex flex-col items-center gap-1 relative  after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
          <p>CONTACT</p>
          <hr className='w-2/4 border-none h-[1.5px] hidden bg-gray-700'/>
         </NavLink>
@@ -55,10 +55,11 @@ const Navbar = () => {
               <img src={assets.dropdown_icon} className='h-4 rotate-180'/>
                  <p>Back</p>
             </div>
-       <NavLink onClick={()=> setVisible(false)} className="py-4 pl-6 border" to="/">Home</NavLink>
-       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/collection">COLLECTON</NavLink>
-       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/about">ABOUT</NavLink>
-       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/contact">CONTACT</NavLink>
+
+       <NavLink onClick={()=> setVisible(false)} className="py-4 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/">Home</NavLink>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/collection">COLLECTON</NavLink>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/about">ABOUT</NavLink>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/contact">CONTACT</NavLink>
         </div>
        </div>
     </div>
