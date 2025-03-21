@@ -17,6 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Register from './pages/Register'
+import Delivery from './pages/Delivery'
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/register" element={<Register/>} />
         <Route path="/place-order" element={<PlaceOder />} />
         <Route path="/orders" element={<Order />} />
+        <Route path='/delivery' element={<Delivery/>} />
         {/* <Route path='/login' element={<Login/>}/> */}
       </Routes>
       <Footer/>

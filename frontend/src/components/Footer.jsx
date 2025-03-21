@@ -29,7 +29,7 @@ function Footer() {
               ABOUT_US
             </a>
 
-            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
+            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" href="/delivery">
               DELIVERY
             </a>
 
