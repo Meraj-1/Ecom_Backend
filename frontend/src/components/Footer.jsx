@@ -21,11 +21,11 @@ function Footer() {
         <div>
           <p className="text-xl font-medium mb-5 ">COMPANY</p>
           <ul className="flex flex-col gap-1 text-gray-600">
-            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
+            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" href="/">           
               Home
             </a>
 
-            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
+            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" href="/about">
               ABOUT_US
             </a>
 
@@ -33,7 +33,7 @@ function Footer() {
               DELIVERY
             </a>
 
-            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">
+            <a class=" cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" href="/policy">
               PRIVACY_POLICY
             </a>
           </ul>
@@ -54,12 +54,12 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <div>
+      {/* <div>
         <hr />
         <p className="py-5 text-sm text-center">
           Copyright 2024 @forever.com - All Right Reserved.
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }

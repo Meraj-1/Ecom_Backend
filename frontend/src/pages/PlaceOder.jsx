@@ -17,20 +17,20 @@ const PlaceOder = () => {
           <Title text1={"DELIVERY"} text2={"INFORMATION"}/>
          </div>
          <div className='flex gap-3'>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='text' placeholder='First name'/>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='text' placeholder='Last name'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='text' placeholder='First name'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='text' placeholder='Last name'/>
          </div>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='email' placeholder='Email address'/>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='text' placeholder='Street'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='email' placeholder='Email address'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='text' placeholder='Street'/>
        <div className='flex gap-3'>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='text' placeholder='City'/>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='text' placeholder='State'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='text' placeholder='City'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='text' placeholder='State'/>
          </div>
          <div className='flex gap-3'>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='number' placeholder='Zipcode'/>
-       <input className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type='text' placeholder='Country'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='number' placeholder='Zipcode'/>
+       <input className='border border-gray-300 cursor-pointer rounded py-1.5 px-3.5 w-full' type='text' placeholder='Country'/>
          </div>
-       <input className=' webkit-scrollbar border border-gray-300 rounded py-1.5 px-3.5 w-full' type='number' placeholder='phone'/>
+       <input className=' webkit-scrollbar border cursor-pointer border-gray-300 rounded py-1.5 px-3.5 w-full' type='number' placeholder='phone'/>
 
      </div>
 <div className="mt-8">
@@ -59,7 +59,7 @@ const PlaceOder = () => {
       </div>
     </div>
     <div className='w-full text-end mt-8'>
-      <button onClick={()=> navigate('/orders')} className='bg-black text-white px-16 py-3 text-sm'>PLACE ORDER</button>
+      <button onClick={()=> navigate('/orders')} className='bg-black text-white cursor-pointer px-16 py-3 text-sm'>PLACE ORDER</button>
     </div>
       </div>
      </div>
