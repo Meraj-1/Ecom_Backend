@@ -55,11 +55,12 @@ const Navbar = () => {
               <img src={assets.dropdown_icon} className='h-4 rotate-180'/>
                  <p>Back</p>
             </div>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/">Home</NavLink>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/collection">COLLECTON</NavLink>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/about">ABOUT</NavLink>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/policy">POLOICY</NavLink>
+       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border" to="/contact">CONTACT</NavLink>
 
-       <NavLink onClick={()=> setVisible(false)} className="py-4 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/">Home</NavLink>
-       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/collection">COLLECTON</NavLink>
-       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/about">ABOUT</NavLink>
-       <NavLink onClick={()=> setVisible(false)} className="py-2 pl-6 border relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 after:ease-in-out hover:after:w-full" to="/contact">CONTACT</NavLink>
         </div>
        </div>
     </div>

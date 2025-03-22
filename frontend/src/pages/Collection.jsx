@@ -82,11 +82,10 @@ const Collection = () => {
   }, [sortType]);
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
-      {/* Filters */}
       <div className="min-w-60">
         <p
           onClick={() => setShowFilter(!showFilter)}
-          className="my-2 text-xl flex font-bold font-serif items-center cursor-pointer gap-2 text-gray-800"
+          className="my-2 text-xl flex   items-center cursor-pointer gap-2 text-gray-800"
         >
           FILTERS
           <img
@@ -98,7 +97,6 @@ const Collection = () => {
           />
         </p>
 
-        {/* Categories Filter Section */}
         <div className={`pl-5 mt-6 ${showFilter ? "" : "hidden"} sm:block`}>
           {/* <p className="mb-3 text-sm font-medium text-gray-800">CATEGORIES</p> */}
           <Title text1="CATEGO" text2="RIES" />
