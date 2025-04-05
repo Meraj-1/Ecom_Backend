@@ -33,42 +33,45 @@ const userSchema = new mongoose.Schema(
     refreshToken: {
       type: String,
     },
-  },{ timestamps: true }
+  },
+  { timestamps: true }
 );
 
 userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-    return await bcrypt.compare(password,  this.password);
+  return await bcrypt.compare(password, this.password);
 };
 
 userSchema.methods.generateAccessToken = function () {
-    return jwt.sign(
-        {
-            _id: this.id,
-            email: this.email,
-            username: this.username,
-            fulllname: this.fulllname,
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-        {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
-        }
-    )
-}
+  return jwt.sign(
+    {
+      _id: this.id,
+      email: this.email,
+      username: this.username,
+      fulllname: this.fulllname,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+    }
+  );
+};
 
 userSchema.methods.generateRefreshToken = function () {
-    return jwt.sign({
-        _id: this.id,
+  return jwt.sign(
+    {
+      _id: this.id,
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
-        expiresIn: process.env.REFRESH_TOKEN_EXPIRY
-    })
-}
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+    }
+  );
+};
 
-export const User = mongoose.model("User", userSchema)
+export const User = mongoose.model("User", userSchema);
